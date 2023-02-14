@@ -24,7 +24,7 @@
     "forwardPorts": [80],
 
     // Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "cp .env.example .env && composer install",
+	"postCreateCommand": "cp .env.default .env && composer install",
 	"portsAttributes": {
 		"80": {
 			"label": "HTTP"
