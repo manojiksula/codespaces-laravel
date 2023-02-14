@@ -20,7 +20,7 @@ RUN apk add --no-cache \
 
 
 RUN set -e \
-  && mkdir -p /var/www \
+  && mkdir -p /workspace \
   && (delgroup www-data || true) \
   && addgroup -g 1000 -S www-data \
   && adduser -u 1000 -D -S -G www-data www-data \
@@ -30,8 +30,8 @@ RUN set -e \
 COPY php-fpm.conf /etc/php8/
 
 #USER www-data
-WORKDIR /var/www/html
-VOLUME /var/www/html
+WORKDIR /workspace
+VOLUME /workspace
 
 EXPOSE 9000
 
