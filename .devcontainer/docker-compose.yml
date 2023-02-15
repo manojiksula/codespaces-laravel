@@ -1,6 +1,6 @@
 version: "3"
 services:
-  app:
+  php:
     build: ./docker/php
     volumes:
       - ../:/workspace
@@ -9,9 +9,8 @@ services:
     volumes:
       - ./:/workspace
 
-  webserver:
+  app:
     image: nginx:alpine
-    container_name: webserver
     restart: unless-stopped
     tty: true
     ports:
