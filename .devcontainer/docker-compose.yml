@@ -4,16 +4,24 @@ services:
     build: ./docker/php
     volumes:
       - ../:/workspace
-    ports:
-      - 80:80
     tty: true
-    environment:
-        APP_ENV: local
-        PHP_EXTENSION_XDEBUG: 1
-        PHP_EXTENSION_PGSQL: 1
-        PHP_EXTENSION_PDO_PGSQL: 1
-        PHP_EXTENSION_GD: 1
-        APACHE_DOCUMENT_ROOT: /workspace/docroot
+    working_dir: /workspace/docroot
+    volumes:
+      - ./:/workspace
+
+  webserver:
+    image: nginx:alpine
+    container_name: webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+      - "3000:3000"
+    volumes:
+      - ./:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+
   db:
     image: percona:5.7.22
     restart: true
